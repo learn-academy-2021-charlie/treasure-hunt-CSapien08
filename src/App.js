@@ -29,6 +29,7 @@ class App extends Component{
     if(index === this.state.treasureLocation){
         board[index] = '💰'
         this.setState({board: board})
+        alert("Congratulations, you've found me tresure!")
     }
     else if(index === this.state.bombLocation){
         board[index] = '💣'
@@ -46,7 +47,6 @@ class App extends Component{
   render(){
     console.log(this.state.treasureLocation)
     console.log(this.state.bombLocation)
-    console.log(this.state.counter)
     return(
       <>
         <h1>Treasure Hunt Game</h1>
