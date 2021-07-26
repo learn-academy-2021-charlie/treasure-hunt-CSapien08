@@ -8,7 +8,8 @@ class App extends Component{
     this.state = {
       board: ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
       treasureLocation: null,
-      bombLocation: null
+      bombLocation: null,
+      counter: 5
     }
   }
   componentDidMount(){
@@ -23,6 +24,7 @@ class App extends Component{
 
   handleGamePlay = (index) => {
     const {board} = this.state
+    var {counter} = this.state
 
     if(index === this.state.treasureLocation){
         board[index] = '💰'
@@ -33,8 +35,9 @@ class App extends Component{
         this.setState({board: board})
     }
     else{
+      counter--
       board[index] = '🌴'
-      this.setState({board: board})
+      this.setState({board: board, counter: counter})
     }
     
     
@@ -43,6 +46,7 @@ class App extends Component{
   render(){
     console.log(this.state.treasureLocation)
     console.log(this.state.bombLocation)
+    console.log(this.state.counter)
     return(
       <>
         <h1>Treasure Hunt Game</h1>
@@ -56,6 +60,7 @@ class App extends Component{
                   />
           })}
         </div>
+        <div>Turn's Left: {this.state.counter}</div>
         
       </>
     )
