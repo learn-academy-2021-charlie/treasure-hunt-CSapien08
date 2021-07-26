@@ -4,8 +4,7 @@ import React, { Component } from 'react'
 class Square extends Component{
 
   handleClick = () => {
-    //console.log(this.props.counter)
-    if(this.props.winOrLose === false)
+    if(this.props.gameState === false)
     {
       this.props.handleGamePlay(this.props.index)
     }
