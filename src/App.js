@@ -7,12 +7,18 @@ class App extends Component{
     super(props)
     this.state = {
       board: ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
-      treasureLocation: null
+      treasureLocation: null,
+      bombLocation: null
     }
   }
   componentDidMount(){
     let treasure = Math.floor(Math.random() * this.state.board.length)
-    this.setState({treasureLocation: treasure})
+    let bomb = Math.floor(Math.random() * this.state.board.length)
+    while(bomb === treasure)
+    {
+      bomb = Math.floor(Math.random() * this.state.board.length)
+    }
+    this.setState({treasureLocation: treasure, bombLocation: bomb})
   }
 
   handleGamePlay = (index) => {
@@ -20,6 +26,10 @@ class App extends Component{
 
     if(index === this.state.treasureLocation){
         board[index] = '💰'
+        this.setState({board: board})
+    }
+    else if(index === this.state.bombLocation){
+        board[index] = '💣'
         this.setState({board: board})
     }
     else{
@@ -32,6 +42,7 @@ class App extends Component{
 
   render(){
     console.log(this.state.treasureLocation)
+    console.log(this.state.bombLocation)
     return(
       <>
         <h1>Treasure Hunt Game</h1>
