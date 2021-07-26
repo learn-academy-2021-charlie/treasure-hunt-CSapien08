@@ -10,6 +10,10 @@ class App extends Component{
     }
   }
 
+  handleGamePlay = (index) => {
+    alert(index)
+  }
+
   render(){
     return(
       <>
@@ -19,6 +23,8 @@ class App extends Component{
             return <Square 
                       value={value}
                       key={index}
+                      index={index}
+                      handleGamePlay={this.handleGamePlay}
                   />
           })}
         </div>
