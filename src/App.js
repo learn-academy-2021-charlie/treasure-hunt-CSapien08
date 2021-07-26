@@ -9,7 +9,8 @@ class App extends Component{
       board: ["?", "?", "?", "?", "?", "?", "?", "?", "?"],
       treasureLocation: null,
       bombLocation: null,
-      counter: 5
+      counter: 5,
+      winOrLose: false,
     }
   }
   componentDidMount(){
@@ -25,15 +26,24 @@ class App extends Component{
   handleGamePlay = (index) => {
     const {board} = this.state
     var {counter} = this.state
+    var {winOrLose} = this.state
 
     if(index === this.state.treasureLocation){
         board[index] = '💰'
-        this.setState({board: board})
+        winOrLose = true
+        this.setState({board: board, winOrLose: winOrLose})
         alert("Congratulations, you've found me tresure!")
     }
     else if(index === this.state.bombLocation){
         board[index] = '💣'
-        this.setState({board: board})
+        winOrLose = true
+        this.setState({board: board, winOrLose: winOrLose})
+        alert("Shiver me timbers, you've found the bomb, better luck next time!")
+    }
+    else if(this.state.counter === 0){
+        winOrLose = true
+        this.setState({winOrLose: winOrLose})
+        alert("HAHAHA, you've ran out of turns, better luck next time!")
     }
     else{
       counter--
@@ -41,12 +51,12 @@ class App extends Component{
       this.setState({board: board, counter: counter})
     }
     
-    
   }
 
   render(){
     console.log(this.state.treasureLocation)
     console.log(this.state.bombLocation)
+    console.log(this.state.counter)
     return(
       <>
         <h1>Treasure Hunt Game</h1>
@@ -57,6 +67,8 @@ class App extends Component{
                       key={index}
                       index={index}
                       handleGamePlay={this.handleGamePlay}
+                      counter={this.state.counter}
+                      winOrLose={this.state.winOrLose}
                   />
           })}
         </div>
